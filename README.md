@@ -25,7 +25,7 @@ This project is an interactive web application based on Streamlit, providing acc
 * **Application framework:** [Streamlit](https://streamlit.io/)
 * **Language:** Python 3.12
 * **Machine learning / NLP:**
-    * [Google AI Studio](https://ai.google.dev/gemini-api/docs): For working with Google LLM's (text recognition, adaptation, TEI, audio description). In our project we used `gemini-2.0-        flash-thinking-exp-01-21`
+    * [Google AI Studio](https://ai.google.dev/gemini-api/docs): For working with Google LLM's (text recognition, adaptation, TEI, audio description). In our project we used `gemini-2.0-flash-thinking-exp-01-21`
     * [Transformers](https://huggingface.co/models): For TTS (speech synthesis) we used [VITS model](https://huggingface.co/utrobinmv/tts_ru_free_hf_vits_low_multispeaker).
     * [PyTorch](https://pytorch.org/): as a backend for Transformers.
     * [RUAccent](https://github.com/Den4ikAI/ruaccent): For placing stress marks before speech synthesis.
