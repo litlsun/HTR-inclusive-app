@@ -1,4 +1,4 @@
-# HTR-inclusive-app
+# HTR-Inclusive-App
 Handwritten Text Recognition (HTR) with Multimodal Large Language Model (LLM) on archives of manuscripts and other visual materials of russian writers of the XX century.
 
 # Project "In Plain Language"
