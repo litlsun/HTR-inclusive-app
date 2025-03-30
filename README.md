@@ -30,5 +30,5 @@ This project is an interactive web application based on Streamlit, providing acc
     * [PyTorch](https://pytorch.org/): as a backend for Transformers.
     * [RUAccent](https://github.com/Den4ikAI/ruaccent): For placing stress marks before speech synthesis.
     * Pandas: For working with local csv and xlsx files.
-* **Обработка изображений:** 
+* **Image Processing:** 
     * Pillow (PIL)
