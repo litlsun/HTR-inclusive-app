@@ -10,7 +10,7 @@ This project is an interactive web application based on Streamlit, providing acc
 * **Browsing archives:** Navigate through the catalog of autographs, grouped by authors, archive types (manuscripts, letters, etc.) and specific works/documents.
 * **Display scans:** View high-quality images of manuscript pages.
 * **Text recognition (OCR/HTR):** Automatically extract text from manuscript images using multimodal LLM.
-* **Adaptation to "Easy Language":** Simplification of the recognized text for better understanding by people with cognitive disabilities (using the [Frequency dictionary of the modern Russian language](http://dict.ruslang.ru/freq.php?act=show&dic=freq_freq&title=%D7%E0%F1%F2%EE%F2%ED%FB%E9%20%F1%EF%E8%F1%EE%EA%20%EB%E5%EC%EC) (based on the materials of the National Corpus of the Russian language)).
+* **Adaptation to "Easy Language":** Simplification of the recognized text for better understanding by people with cognitive disabilities (using the [Frequency dictionary of the modern Russian language](http://dict.ruslang.ru/freq.php?act=show&dic=freq_freq&title=%D7%E0%F1%F2%EE%F2%ED%FB%E9%20%F1%EF%E8%F1%EE%EA%20%EB%E5%EC%EC) based on the materials of the National Corpus of the Russian language).
 * **TEI:** Generation of XML of the text in accordance with the Text Encoding Initiative standards for researchers.
 * **Audio description:** Generation of descriptions of visual features of the manuscript (handwriting, notes, page condition) for blind and visually impaired users.
 * **Speech synthesis:** Voice-over of the generated audio description in Russian (male or female) using the VITS model.
