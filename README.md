@@ -20,7 +20,7 @@ This project is an interactive web application based on Streamlit, providing acc
 * **Inclusive interface:** Ability to switch between standard and inclusive (higher contrast, with enlarged elements) display modes.
 * **Data download:** Ability to download page scans (as PDF or ZIP archive with PNG) and all generated texts/markup (TXT, XML).
 
-## 💻 Tools
+## ⚙️ Tools
 
 * **Application framework:** [Streamlit](https://streamlit.io/)
 * **Language:** Python 3.12
