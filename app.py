@@ -11,6 +11,9 @@ from css_vars import NORMAL_CSS, ACCESSIBLE_CSS
 from llm import llm_solution, TEI_rules
 from speech_generator import generate_speech
 
+# Выбор модели
+model_name = 'gemini-2.0-flash-thinking-exp-01-21'
+
 # -----------------------
 # Первичная настройка страницы 
 # -----------------------
@@ -222,7 +225,7 @@ def main_app():
         # Инициализация LLM 
         try:
              # Укажите модель 
-             llm_sol = llm_solution(model='gemini-2.0-flash-thinking-exp-01-21') 
+             llm_sol = llm_solution(model=model_name) 
         except NameError:
              st.error("Класс llm_solution не найден. Проверьте импорт.")
              llm_sol = None
