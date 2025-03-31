@@ -33,3 +33,8 @@
 * Pandas: Для работы с локальными файлами csv и xlsx.
 * **Обработка изображений:**
 * Pillow (PIL)
+
+
+## Советы по использованию
+В каталоге [data](https://github.com/Ozymandias-17/HTR-inclusive-app/tree/main/data) вы должны разместить свои данные 'Authors_Manuscripts'.
+Вы можете получить архив 'Authors_Manuscripts' с предоставленным [manuscripts_parser.ipynb](https://github.com/Ozymandias-17/HTR-inclusive-app/blob/main/data/manuscripts_parser.ipynb) или вы можете загрузить небольшой образец архива через [Google Drive](https://drive.google.com/uc?export=download&id=1ZW4TRvfuRm8heBQACvqTkWnz5LTx6Oba) просто чтобы начать.
