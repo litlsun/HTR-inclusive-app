@@ -1,0 +1,2 @@
+In this directory you should place your 'Authors_Manuscripts' data. 
+You can get 'Authors_Manuscripts' archive with manuscripts_parser.ipynb or via [Google Drive](https://docs.python.org/3/library/sqlite3.html)
