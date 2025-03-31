@@ -8,7 +8,6 @@ from PIL import Image
 import streamlit as st
 from css_vars import NORMAL_CSS, ACCESSIBLE_CSS
 
-
 from llm import llm_solution, TEI_rules
 from speech_generator import generate_speech
 
@@ -113,10 +112,9 @@ def download_pdf(author, archive_type, archive_title):
     return buffer
 
 # -----------------------
-# Intro Page: выбор версии (из вашего кода)
+# Intro Page: выбор версии 
 # -----------------------
 def show_intro_page():
-    # Функция точно как в вашем коде
     st.title("Добро пожаловать!")
     st.write("Это проект «Понятным языком». Пожалуйста, выберите версию сайта:")
 
@@ -164,7 +162,7 @@ def show_intro_page():
 
 # Callback функция для навигации из поиска 
 def select_archive_callback(author, archive_type, archive):
-    """Обновляет session_state для выбора архива."""
+    # Обновляет session_state для выбора архива
     st.session_state["selected_archive"] = {
         "author": author,
         "archive_type": archive_type,
@@ -201,7 +199,6 @@ def main_app():
 # -----------------------
     if "selected_image" in st.session_state:
         details = st.session_state["selected_image"]
-        # .get для безопасного доступа к ключам словаря
         image_index = details.get("image_index", -1)
         image_path = details.get("image_path")
 
@@ -269,7 +266,6 @@ def main_app():
                     except Exception as e:
                         st.error(f"Ошибка OCR: {e}")
 
-
             if image_key in st.session_state["ocr_text_results"]:
                 col1, col2 = st.columns([9, 1])
                 with col1:
@@ -291,7 +287,6 @@ def main_app():
                         except Exception as e:
                             st.error(f"Ошибка адаптации: {e}")
 
-
                 if image_key in st.session_state["easy_text_results"]:
                     col1, col2 = st.columns([9, 1])
                     with col1:
@@ -311,7 +306,6 @@ def main_app():
                          except Exception as e:
                              st.error(f"Ошибка генерации TEI: {e}")
 
-
                 if image_key in st.session_state["tei_text_results"]:
                     col1, col2 = st.columns([9, 1])
                     with col1:
@@ -327,7 +321,7 @@ def main_app():
                  with st.spinner("Генерация описания, подождите..."):
                      try:
                         desc_text = llm_sol.generate_description(image_path)
-                        # Очистка точно как в вашем коде
+                        # Очистка
                         cleaned_desc = re.sub(" +", " ", re.sub(r"\*", "", desc_text)).strip() 
                         st.session_state["desc_text_results"][image_key] = cleaned_desc
                      except Exception as e:
@@ -392,7 +386,6 @@ def main_app():
 # -----------------------
     elif "selected_archive" in st.session_state:
         details = st.session_state["selected_archive"]
-        # Используем .get для безопасного доступа к ключам
         author = details.get("author", "N/A")
         archive_type = details.get("archive_type", "N/A")
         archive = details.get("archive", "N/A")
@@ -554,7 +547,6 @@ def main_app():
                     else: # Если запрос пустой
                          st.info("Введите запрос для поиска.")
 
-
             with tab2:
                 st.subheader("Расширенный поиск")
                 # Логика выбора автора/типа/года 
@@ -593,7 +585,7 @@ def main_app():
                                             results.append({"author": author,
                                                             "archive_type": arch_type,
                                                             "archive": archive})
-                    # Логика отображения результатов как в вашем коде
+                    # Логика отображения результатов
                     if results:
                         st.write(f"Найдено {len(results)} результатов:")
                         for idx, res in enumerate(results): # idx для уникальности ключа
