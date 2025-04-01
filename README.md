@@ -5,6 +5,7 @@ Handwritten Text Recognition (HTR) with Multimodal Large Language Model (LLM) on
 **Our mission** is to make cultural heritage accessible and alive, without physical, linguistic or cognitive barriers.
 This project is an interactive web application based on Streamlit, providing access to digitized autographs of russian writers of the 20th century. The main goal is to make cultural heritage accessible to a wide range of users, including people with special perception of information, offering tools for analyzing, adapting and voicing texts.
 
+
 ## 🌟 Key Features
 
 * **Browsing archives:** Navigate through the catalog of autographs, grouped by authors, archive types (manuscripts, letters, etc.) and specific works/documents.
@@ -19,6 +20,7 @@ This project is an interactive web application based on Streamlit, providing acc
     * Advanced search with filtering by author, archive type and keywords in metadata.
 * **Inclusive interface:** Ability to switch between standard and inclusive (higher contrast, with enlarged elements) display modes.
 * **Data download:** Ability to download page scans (as PDF or ZIP archive with PNG) and all generated texts/markup (TXT, XML).
+
 
 ## ⚙️ Tools
 
