@@ -17,7 +17,7 @@
 * **Поиск:**
     * Простой поиск по метаданным архива.
     * Расширенный поиск с фильтрацией по автору, типу архива и ключевым словам в метаданных.
-* **Инклюзивный интерфейс:** Возможность переключения между стандартным и инклюзивным (более контрастным, с увеличенными элементами) режимами отображения.
+* **Инклюзивный интерфейс** 
 * **Загрузка данных:** Возможность загрузки сканов страниц (в виде PDF или ZIP-архива с PNG) и всех сгенерированных текстов/разметки (TXT, XML).
 
 
@@ -36,5 +36,5 @@
 
 
 ## Советы по использованию
-В каталоге [data](https://github.com/Ozymandias-17/HTR-inclusive-app/tree/main/data) необходимо разместить свои данные 'Authors_Manuscripts'.
-Вы можете получить архив 'Authors_Manuscripts' с предоставленным [manuscripts_parser.ipynb](https://github.com/Ozymandias-17/HTR-inclusive-app/blob/main/data/manuscripts_parser.ipynb) или вы можете загрузить небольшой образец архива через [Google Drive](https://drive.google.com/uc?export=download&id=1ZW4TRvfuRm8heBQACvqTkWnz5LTx6Oba) просто чтобы начать.
+В каталоге [data](/main/data) необходимо разместить свои данные 'Authors_Manuscripts'.
+Вы можете получить архив 'Authors_Manuscripts' с предоставленным [manuscripts_parser.ipynb](/data/manuscripts_parser.ipynb) или вы можете загрузить небольшой образец архива через [Google Drive](https://drive.google.com/uc?export=download&id=1ZW4TRvfuRm8heBQACvqTkWnz5LTx6Oba) просто чтобы начать.
