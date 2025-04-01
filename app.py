@@ -6,13 +6,14 @@ import pandas as pd
 from PIL import Image
 
 import streamlit as st
-from css_vars import NORMAL_CSS, ACCESSIBLE_CSS
+from css_vars import NORMAL_CSS  
 
 from llm import llm_solution, TEI_rules
 from speech_generator import generate_speech
 
 # Выбор модели
-model_name = 'gemini-2.0-flash-thinking-exp-01-21'
+model_name = "gemini-2.0-flash-thinking-exp-01-21"
+
 
 # -----------------------
 # Первичная настройка страницы 
@@ -25,7 +26,9 @@ st.set_page_config(page_title="Проект «Понятным языком»",
 # -----------------------
 # Вспомогательные функции 
 # -----------------------
+# Путь к архиву
 DATASET_DIR = "./data/Authors_Manusripts"
+
 # Базовая проверка существования директории
 if not os.path.exists(DATASET_DIR):
     try:
@@ -47,7 +50,7 @@ def list_archive_types(author):
 
 def list_archives(author, archive_type):
     path = os.path.join(DATASET_DIR, author, archive_type)
-    # Проверка существования пути для избежания ошибок
+    # Проверка существования пути 
     if not os.path.isdir(path):
         return []
     return sorted([d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))])
@@ -56,7 +59,6 @@ def load_metadata(author, archive_type, archive_title):
     meta_path = os.path.join(DATASET_DIR, author, archive_type, archive_title, "meta_data.xlsx")
     if os.path.exists(meta_path):
         try:
-            # это может вызвать ошибку, если pandas требует его для .xlsx
             return pd.read_excel(meta_path, index_col=0)
         except Exception: 
              return None
@@ -72,7 +74,6 @@ def get_image_paths(author, archive_type, archive_title):
         return images
     except Exception: 
         return []
-
 
 def download_images_zip(author, archive_type, archive_title):
     folder = os.path.join(DATASET_DIR, author, archive_type, archive_title)
@@ -90,7 +91,7 @@ def download_images_zip(author, archive_type, archive_title):
                     if os.path.isfile(file_path):
                         zip_file.write(file_path, arcname=file)
     except Exception:
-         buffer = io.BytesIO() # Очищаем буфер при ошибке
+         buffer = io.BytesIO() # очистка буфера при ошибке
     buffer.seek(0)
     return buffer
 
@@ -110,98 +111,48 @@ def download_pdf(author, archive_type, archive_title):
         try: 
             images[0].save(buffer, save_all=True, append_images=images[1:], format="PDF")
         except Exception:
-             buffer = io.BytesIO() # Очищаем буфер при ошибке
+             buffer = io.BytesIO() 
     buffer.seek(0)
     return buffer
 
-# -----------------------
-# Intro Page: выбор версии 
-# -----------------------
-def show_intro_page():
-    st.title("Добро пожаловать!")
-    st.write("Это проект «Понятным языком». Пожалуйста, выберите версию сайта:")
-
-    st.markdown(
-        """
-        <style>
-        div.stButton > button:first-child {
-            background-color: #6F4E37;
-            color: #FFF8DC;
-            border: none;
-            border-radius: 10px;
-            padding: 20px 40px;
-            font-size: 20px;
-            font-weight: bold;
-            width: 250px;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
-        div.stButton > button:first-child:hover {
-            background-color: #4A3C30;
-        }
-        .st-emotion-cache-1v0mbdj {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("Обычная версия"):
-            st.session_state["accessibility_mode"] = "normal"
-            st.rerun()
-    with col2:
-        if st.button("Инклюзивная версия"):
-            st.session_state["accessibility_mode"] = "accessible"
-            st.rerun()
+def download_metadata(author, archive_type, archive_title):
+    meta_path = os.path.join(DATASET_DIR, author, archive_type, archive_title, "meta_data.xlsx")
+    if os.path.exists(meta_path):
+        try:
+            with open(meta_path, "rb") as f:
+                buffer = io.BytesIO(f.read())
+            buffer.seek(0)
+            return buffer
+        except Exception:
+            return None
+    return None
 
 # Callback функция для навигации из поиска 
 def select_archive_callback(author, archive_type, archive):
-    # Обновляет session_state для выбора архива
+    """Обновляет session_state для выбора архива."""
     st.session_state["selected_archive"] = {
         "author": author,
         "archive_type": archive_type,
         "archive": archive
     }
-    # Убираем выбор изображения, если он был, при переходе к новому архиву
+    # Убрать выбор изображения, если он был, при переходе к новому архиву
     if "selected_image" in st.session_state:
         st.session_state.pop("selected_image")
+
 
 # -----------------------
 # Основное приложение
 # -----------------------
 def main_app():
-    # Применяем стили в зависимости от выбранного режима 
-    # обработка KeyError на случай отсутствия ключа
-    try:
-        if st.session_state["accessibility_mode"] == "normal":
-            st.markdown(NORMAL_CSS, unsafe_allow_html=True)
-        else:
-            st.markdown(ACCESSIBLE_CSS, unsafe_allow_html=True)
-    except KeyError:
-        # Если режим не выбран, устанавливаем по умолчанию и продолжаем
-        st.session_state["accessibility_mode"] = "normal"
-        st.markdown(NORMAL_CSS, unsafe_allow_html=True)
-        st.warning("Режим доступности не был выбран, установлен режим 'normal'.")
-    except NameError:
-        st.warning("CSS переменные не найдены. Проверьте импорт css_vars.")
-    except Exception as e:
-        st.warning(f"Не удалось применить CSS: {e}")
-
+    # Задать стиль
+    st.markdown(NORMAL_CSS, unsafe_allow_html=True)
 
 # -----------------------
 # Страница отдельного скана автографа 
 # -----------------------
     if "selected_image" in st.session_state:
         details = st.session_state["selected_image"]
+        # .get для безопасного доступа к ключам словаря
         image_index = details.get("image_index", -1)
         image_path = details.get("image_path")
 
@@ -221,10 +172,9 @@ def main_app():
              st.error(f"Не удалось отобразить изображение: {e}")
              return # Выход, если ошибка отображения
 
-        st.subheader("Функциональности автографа")
+        st.subheader("Доступность")
         # Инициализация LLM 
         try:
-             # Укажите модель 
              llm_sol = llm_solution(model=model_name) 
         except NameError:
              st.error("Класс llm_solution не найден. Проверьте импорт.")
@@ -233,7 +183,7 @@ def main_app():
              st.error(f"Ошибка инициализации LLM: {e}")
              llm_sol = None
 
-        # Инициализируем ключи в session_state, если их нет 
+        # Инициализация ключей в session_state, если их нет 
         if "ocr_text_results" not in st.session_state: st.session_state["ocr_text_results"] = {}
         if "easy_text_results" not in st.session_state: st.session_state["easy_text_results"] = {}
         if "tei_text_results" not in st.session_state: st.session_state["tei_text_results"] = {}
@@ -250,7 +200,7 @@ def main_app():
                  st.error(f"Ошибка кодирования текста для скачивания: {e}")
                  data = b"" # Пустые байты в случае ошибки
 
-             # Использование уникального ключа для download_button
+             # уникальный ключ для download_button
              download_key = f"download_{filename.replace('.', '_').replace(os.sep, '_')}"
              st.download_button(label=label,
                                 data=data,
@@ -259,7 +209,7 @@ def main_app():
                                 key=download_key,
                                 help=help_text)
 
-        # Кнопки и логика LLM (только если llm_sol успешно инициализирован)
+        # Кнопки и логика LLM 
         if llm_sol:
             if st.button("Расшифровать текст"):
                 with st.spinner("Обработка изображения, подождите..."):
@@ -268,6 +218,7 @@ def main_app():
                         st.session_state["ocr_text_results"][image_key] = ocr_text
                     except Exception as e:
                         st.error(f"Ошибка OCR: {e}")
+
 
             if image_key in st.session_state["ocr_text_results"]:
                 col1, col2 = st.columns([9, 1])
@@ -290,6 +241,7 @@ def main_app():
                         except Exception as e:
                             st.error(f"Ошибка адаптации: {e}")
 
+
                 if image_key in st.session_state["easy_text_results"]:
                     col1, col2 = st.columns([9, 1])
                     with col1:
@@ -309,6 +261,7 @@ def main_app():
                          except Exception as e:
                              st.error(f"Ошибка генерации TEI: {e}")
 
+
                 if image_key in st.session_state["tei_text_results"]:
                     col1, col2 = st.columns([9, 1])
                     with col1:
@@ -318,13 +271,13 @@ def main_app():
                              tei_bytes = st.session_state["tei_text_results"][image_key].encode('utf-8')
                          except:
                              tei_bytes = b""
-                         download_text(tei_bytes, f"tei_{os.path.basename(image_key)}.xml", "text/xml", label="</>", help_text="Скачать xml")
+                         download_text(tei_bytes, f"tei_{os.path.basename(image_key)}.xml", "text/xml", label="&lt;/&gt;", help_text="Скачать xml")
 
             if st.button("Тифлокомментирование"):
                  with st.spinner("Генерация описания, подождите..."):
                      try:
                         desc_text = llm_sol.generate_description(image_path)
-                        # Очистка
+                        # Очистка 
                         cleaned_desc = re.sub(" +", " ", re.sub(r"\*", "", desc_text)).strip() 
                         st.session_state["desc_text_results"][image_key] = cleaned_desc
                      except Exception as e:
@@ -333,7 +286,7 @@ def main_app():
             if image_key in st.session_state["desc_text_results"]:
                 desc_text = st.session_state["desc_text_results"][image_key]
 
-                # Инициализируем состояние для аудио
+                # состояние для аудио
                 if f"speech_audio_{image_key}" not in st.session_state:
                     st.session_state[f"speech_audio_{image_key}"] = None
                 if f"show_audio_player_{image_key}" not in st.session_state:
@@ -353,32 +306,29 @@ def main_app():
                         if desc_text:
                             with st.spinner(""):
                                 try:
-                                    # Вызываем модифицированную функцию
                                     speech_output, sampling_rate = generate_speech(desc_text)
-                                    # Сохраняем результат в session_state
                                     st.session_state[f"speech_audio_{image_key}"] = (speech_output, sampling_rate)
                                     st.session_state[f"show_audio_player_{image_key}"] = True # Показать плеер
-                                    st.rerun() # Перезапускаем скрипт, чтобы отобразить плеер ниже
+                                    st.rerun() 
                                 except ImportError as e:
                                     st.error(f"Ошибка импорта при генерации речи: {e}. Убедитесь, что все зависимости установлены.")
                                 except Exception as e:
                                     st.error(f"Ошибка генерации речи: {e}")
-                                    # Сбрасываем состояние аудио при ошибке
                                     st.session_state[f"speech_audio_{image_key}"] = None
                                     st.session_state[f"show_audio_player_{image_key}"] = False
                         else:
                             st.warning("Нет текста для озвучивания.")
 
-                # Отображаем аудиоплеер под колонками, если аудио было сгенерировано
+                # аудиоплеер под колонками, если аудио было сгенерировано
                 if st.session_state[f"show_audio_player_{image_key}"]:
                     audio_data = st.session_state.get(f"speech_audio_{image_key}")
                     if audio_data is not None:
                         speech_output, sampling_rate = audio_data
                         st.audio(speech_output, sample_rate=sampling_rate, format='audio/wav')
                     else:
-                        # Это состояние не должно возникать при правильной логике, но на всякий случай
+
                         st.warning("Аудио было запрошено, но данные отсутствуют.")
-                        st.session_state[f"show_audio_player_{image_key}"] = False # Сбрасываем флаг
+                        st.session_state[f"show_audio_player_{image_key}"] = False 
 
         if st.button("⬅️ Вернуться к архиву"):
             st.session_state.pop("selected_image")
@@ -398,7 +348,7 @@ def main_app():
         # кнопка возврата к общему списку/поиску 
         if st.button("⬅️ Вернуться к выбору архива", key="back_to_main_from_archive"):
              st.session_state.pop("selected_archive")
-             # Очищаем и изображение на всякий случай
+             # Очистка изображения
              if "selected_image" in st.session_state:
                  st.session_state.pop("selected_image")
              st.rerun()
@@ -439,23 +389,46 @@ def main_app():
             st.info("Нет изображений в данном архиве.") 
 
         st.subheader("Скачать автограф")
-        col1, col2 = st.columns(2)
-        with col1:
+        # st.container для группировки кнопок
+        download_container = st.container()
+        with download_container:
+            # CSS grid для равномерного распределения кнопок
+            st.markdown(
+                """
+                <style>
+                .download-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+                    gap: 1rem; /* Расстояние между кнопками */
+                }
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            st.markdown("<div class='download-grid'>", unsafe_allow_html=True)
+
             pdf_buffer = download_pdf(author, archive_type, archive)
-            st.download_button("Скачать PDF 📑", data=pdf_buffer, file_name=f"{archive}.pdf", mime="application/pdf")
-        with col2:
+            st.download_button("Скачать PDF 📑", data=pdf_buffer, file_name=f"{archive}.pdf", mime="application/pdf", key=f"pdf_{archive}")
+
             zip_buffer = download_images_zip(author, archive_type, archive)
-            st.download_button("Скачать PNG архив 🎞️", data=zip_buffer, file_name=f"{archive}.zip", mime="application/zip")
+            st.download_button("Скачать PNG архив 🎞️", data=zip_buffer, file_name=f"{archive}.zip", mime="application/zip", key=f"zip_{archive}")
+
+            meta_buffer = download_metadata(author, archive_type, archive)
+            if meta_buffer:
+                st.download_button("Скачать метаданные 🗂️", data=meta_buffer, file_name=f"meta_{archive}.csv", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", key=f"meta_{archive}")
+            else:
+                st.write("Метаданные отсутствуют.")
+
+            st.markdown("</div>", unsafe_allow_html=True)
 
     # Если ни архив, ни изображение не выбраны, показываем меню 
     else:
-        # Заголовок и подзаголовок 
         st.title("Архив автографов писателей 20 века")
         st.write("Просматривайте автографы, читайте их расшифровку, перевод на ясный язык и тифлокомментирование. "
                  "Для исследователей также доступна TEI-разметка и метаданные.")
 
         # Меню навигации в боковой панели 
-        # Добавлено сохранение выбора в session_state для предотвращения сброса
         if 'menu_selection' not in st.session_state:
             st.session_state.menu_selection = "Домой" # Значение по умолчанию
 
@@ -467,13 +440,11 @@ def main_app():
             current_index = 0 # По умолчанию "Домой", если значение некорректно
             st.session_state.menu_selection = "Домой"
 
-        menu = st.sidebar.radio(
-            "Навигация",
-            menu_options,
-            index=current_index,
-            key="sidebar_navigation" # ключ для стабильности
-            )
-        # Обновляем сохраненное значение после выбора пользователя
+        menu = st.sidebar.radio("Навигация",
+                                menu_options,
+                                index=current_index,
+                                key="sidebar_navigation") # ключ для стабильности
+        # Обновление сохраненного значения после выбора пользователя
         st.session_state.menu_selection = menu
 
 # -----------------------
@@ -535,7 +506,7 @@ def main_app():
                                                 continue
                     # Логика отображения результатов 
                     if results:
-                        st.write(f"Найдено {len(results)} результатов:")
+                        st.success(f"Найдено {len(results)} результатов:")
                         for idx, res in enumerate(results):
                              button_label = f"{res['author']} - {res['archive_type']} - {res['archive']}"
                              button_key = f"res_{res['author']}_{res['archive_type']}_{res['archive']}_{idx}"
@@ -546,9 +517,10 @@ def main_app():
 
                     # Сообщение "Ничего не найдено" 
                     elif search_query: # Показываем, только если поиск был выполнен
-                         st.write("Ничего не найдено.")
+                         st.info("По вашему запросу ничего не найдено.")
                     else: # Если запрос пустой
                          st.info("Введите запрос для поиска.")
+
 
             with tab2:
                 st.subheader("Расширенный поиск")
@@ -588,11 +560,11 @@ def main_app():
                                             results.append({"author": author,
                                                             "archive_type": arch_type,
                                                             "archive": archive})
-                    # Логика отображения результатов
+                    # Логика отображения результатов 
                     if results:
-                        st.write(f"Найдено {len(results)} результатов:")
+                        st.success(f"Найдено {len(results)} результатов:")
                         for idx, res in enumerate(results): # idx для уникальности ключа
-                            button_label = f"{res['author']} - {res['archive_type']} - {res['archive']}"
+                            button_label = f"{res['author']} / {res['archive_type']} / {res['archive']}"
                             button_key = f"adv_{res['author']}_{res['archive_type']}_{res['archive']}_{idx}"
                             st.button(
                                 button_label,
@@ -603,26 +575,34 @@ def main_app():
    
                     else:
 
-                        st.write("Ничего не найдено.")
+                        st.info("По вашему запросу ничего не найдено.")
 
 # -----------------------
 # Раздел «О проекте» 
 # -----------------------
         elif menu == "О проекте":
             st.header("О проекте")
-            st.write("""
-                Данное веб-приложение позволяет ознакомиться с автографами писателей.
-                Каждый материал сопровождается метаданными, сканами, текстовой расшифровкой,
-                TEI-разметкой, адаптацией на ясный язык и тифлокомментированием.
+            st.markdown("""
+                Данное веб-приложение разработано для обеспечения доступа к оцифрованным автографам
+                русскоязычных писателей XX века.
+
+                **Ключевые особенности:**
+                * Просмотр сканов рукописей.
+                * Автоматическая расшифровка текста (OCR).
+                * Адаптация текста на "Ясный язык".
+                * Генерация TEI-разметки для исследователей.
+                * Тифлокомментирование для описания визуальных деталей.
+                * Синтез речи для озвучивания описаний.
+                * Поиск по архивам и метаданным.
 
                 **Наша миссия** — сделать культурное наследие доступным и живым,
-                без физических, языковых или когнитивных барьеров.
+                преодолевая физические, языковые и когнитивные барьеры, и предоставить удобные
+                инструменты как для обычных читателей, так и для исследователей.
             """)
+            st.info("Для навигации по архивам используйте раздел 'Домой' или 'Поиск'.")
 
 # -----------------------
 # Логика показа Intro Page или основного приложения
 # -----------------------
-if "accessibility_mode" not in st.session_state:
-    show_intro_page()
-else:
+if __name__ == "__main__":
     main_app()
