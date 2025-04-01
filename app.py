@@ -6,7 +6,7 @@ import pandas as pd
 from PIL import Image
 
 import streamlit as st
-from css_vars import NORMAL_CSS  
+from css import NORMAL_CSS  
 
 from llm import llm_solution, TEI_rules
 from speech_generator import generate_speech
