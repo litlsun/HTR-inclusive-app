@@ -5,7 +5,7 @@ Handwritten Text Recognition (HTR) with Multimodal Large Language Model (LLM) on
 **Our mission** is to make cultural heritage accessible and alive, without physical, linguistic or cognitive barriers.
 This project is an interactive web application based on Streamlit, providing access to digitized autographs of russian writers of the 20th century. The main goal is to make cultural heritage accessible to a wide range of users, including people with special perception of information, offering tools for analyzing, adapting and voicing texts.
 
-[Смотреть видео](https://github.com/Ozymandias-17/HTR-inclusive-app/blob/main/img/img.webm)
+https://github.com/Ozymandias-17/HTR-inclusive-app/blob/main/img/img.webm
 
 ## 🌟 Key Features
 
