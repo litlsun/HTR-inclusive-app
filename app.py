@@ -32,11 +32,14 @@ DATASET_DIR = "./data/Authors_Manusripts"
 # Базовая проверка существования директории
 if not os.path.exists(DATASET_DIR):
     try:
-        os.makedirs(DATASET_DIR, exist_ok=True)
+        from googledrivedownloader import download_file_from_google_drive as gdd
+        gdd(file_id='1ZW4TRvfuRm8heBQACvqTkWnz5LTx6Oba',  # Позволяет установить небольшой образец архива из Гугл Диска
+            dest_path='./data/Authors_Manusripts.zip',
+            unzip=True)
         print(f"INFO: Directory {DATASET_DIR} created.") 
     except OSError as e:
         st.error(f"Не удалось создать директорию {DATASET_DIR}: {e}")
-        st.stop() 
+        st.stop()  
 
 def list_authors():
     return sorted([d for d in os.listdir(DATASET_DIR) if os.path.isdir(os.path.join(DATASET_DIR, d))])
