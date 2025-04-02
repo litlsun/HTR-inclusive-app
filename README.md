@@ -3,7 +3,7 @@ Handwritten Text Recognition (HTR) with Multimodal Large Language Model (LLM) on
 
 # Project "In Plain Language"
 **Our mission** is to make cultural heritage accessible and alive, without physical, linguistic or cognitive barriers.
-This project is an interactive web application based on Streamlit, providing access to digitized autographs of russian writers of the 20th century. The main goal is to make cultural heritage accessible to a wide range of users, including people with special perception of information, offering tools for analyzing, adapting and voicing texts.
+This project is an interactive web application based on Streamlit, providing access to digitized autographs of russian writers of the 20th century. The main goal is to make cultural heritage accessible to a wide range of users, including people with special perception of information, offering tools for analyzing, adapting and voicing texts. [litlsun](https://github.com/litlsun) also helped make the project.
 
 
 ## 🌟 Key Features
@@ -39,8 +39,3 @@ This project is an interactive web application based on Streamlit, providing acc
 ## Usage Tips
 In [data](/data) directory you should place your 'Authors_Manuscripts' data. 
 You can get 'Authors_Manuscripts' archive with provided [manuscripts_parser.ipynb](/data/manuscripts_parser.ipynb) or you can download a small sample of the archive via [Google Drive](https://drive.google.com/uc?export=download&id=1ZW4TRvfuRm8heBQACvqTkWnz5LTx6Oba) just to get started.
-
-
-## Gallery
-![streamlit-main](https://github.com/user-attachments/assets/b8815554-92e7-40c8-8caa-c38cb7bc899a)
-![main](https://github.com/user-attachments/assets/4692eab5-923e-4a58-af87-3c60d551fff4)
