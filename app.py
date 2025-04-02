@@ -228,7 +228,7 @@ def main_app():
                 with col1:
                     st.text_area("Расшифрованный текст", value=st.session_state["ocr_text_results"][image_key], height=350, key=f"ocr_{image_key}")
                 with col2:
-                    # Передаем байты в функцию скачивания
+                    # байты в функцию скачивания
                     try:
                         ocr_bytes = st.session_state["ocr_text_results"][image_key].encode('utf-8')
                     except:
@@ -428,7 +428,7 @@ def main_app():
     # Если ни архив, ни изображение не выбраны, показываем меню 
     else:
         st.title("Архив автографов писателей 20 века")
-        st.write("Просматривайте автографы, читайте их расшифровку, перевод на ясный язык и тифлокомментирование. "
+        st.write("Просматривайте автографы, читайте их расшифровку, адаптацию на ясный язык и тифлокомментарий. "
                  "Для исследователей также доступна TEI-разметка и метаданные.")
 
         # Меню навигации в боковой панели 
@@ -499,13 +499,13 @@ def main_app():
                                     for archive in list_archives(author, arch_type):
                                         meta = load_metadata(author, arch_type, archive)
                                         if meta is not None:
-                                            try: # Добавлена обработка ошибок на случай не-строковых данных
+                                            try: # обработка ошибок на случай не-строковых данных
                                                 meta_str = meta.to_string().lower()
                                                 if search_query.lower() in meta_str:
                                                     results.append({"author": author,
                                                                     "archive_type": arch_type,
                                                                     "archive": archive})
-                                            except AttributeError: # Пропускаем, если to_string не работает
+                                            except AttributeError:
                                                 continue
                     # Логика отображения результатов 
                     if results:
@@ -518,8 +518,7 @@ def main_app():
                                        on_click=select_archive_callback,
                                        args=(res['author'], res['archive_type'], res['archive']))
 
-                    # Сообщение "Ничего не найдено" 
-                    elif search_query: # Показываем, только если поиск был выполнен
+                    elif search_query: 
                          st.info("По вашему запросу ничего не найдено.")
                     else: # Если запрос пустой
                          st.info("Введите запрос для поиска.")
@@ -603,7 +602,26 @@ def main_app():
                 инструменты как для обычных читателей, так и для исследователей.
             """)
             st.info("Для навигации по архивам используйте раздел 'Домой' или 'Поиск'.")
+            
+            # Сноска в разделе "О проекте" 
+            st.markdown(
+                """
+                <div style="font-size: 0.9rem; margin-top: 2rem; color: #6F4E37;">
+                    <p>
+                        <span style="font-weight: bold;">*</span> 
+                        <span style="font-style: italic;">Ясный язык</span> — это система, которая делает тексты простыми и понятными для всех. Он использует короткие предложения, избегает сложных терминов и помогает людям с дислексией, нейроотличиями или с базовым знанием языка легко усваивать информацию.
+                    </p>
+                    <p>
+                        <span style="font-weight: bold;">*</span> 
+                        <span style="font-style: italic;">Тифлокомментарий</span> - это целевая информация, специально подготовленная для слепых (слабовидящих) для замещения (или дополнения) визуальной информации, которую воспринимает зрячий и которая из-за слепоты недоступна (или малодоступна) слепым (слабовидящим).
+                    </p>
+                </div>
+                """,
+                unsafe_allow_html=True
+                )
 
-
+# -----------------------
+# Логика показа Intro Page или основного приложения
+# -----------------------
 if __name__ == "__main__":
     main_app()
