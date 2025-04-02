@@ -39,3 +39,11 @@ This project is an interactive web application based on Streamlit, providing acc
 ## Usage Tips
 In [data](/data) directory you should place your 'Authors_Manuscripts' data. 
 You can get 'Authors_Manuscripts' archive with provided [manuscripts_parser.ipynb](/data/manuscripts_parser.ipynb) or you can download a small sample of the archive via [Google Drive](https://drive.google.com/uc?export=download&id=1ZW4TRvfuRm8heBQACvqTkWnz5LTx6Oba) just to get started.
+
+
+## Gallery
+
+![image_1](https://github.com/user-attachments/assets/9c7d93bd-261f-456f-b8c3-e8fee1f16b44)
+
+![image_2](https://github.com/user-attachments/assets/8f09fefe-6d05-44ef-b0c1-dfc1efc0bf9b)
+![image_3](https://github.com/user-attachments/assets/5e1f7420-4d82-452b-9a72-4aa53c1c5e8c)
