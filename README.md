@@ -45,3 +45,6 @@ You can get 'Authors_Manuscripts' archive with provided [manuscripts_parser.ipyn
 <img src="https://github.com/user-attachments/assets/9c7d93bd-261f-456f-b8c3-e8fee1f16b44" width="1000" height="500">
 <img src="https://github.com/user-attachments/assets/8f09fefe-6d05-44ef-b0c1-dfc1efc0bf9b" width="600" height="800">
 <img src="https://github.com/user-attachments/assets/5e1f7420-4d82-452b-9a72-4aa53c1c5e8c" width="600" height="800">
+
+![img_main_functions](https://github.com/user-attachments/assets/abdd4e22-7dd7-4d48-baa9-9476ecfd559f)
+
