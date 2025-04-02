@@ -42,5 +42,5 @@ You can get 'Authors_Manuscripts' archive with provided [manuscripts_parser.ipyn
 
 
 ## Gallery
-![img_main_page](https://github.com/user-attachments/assets/72230aa0-e379-4bb0-ac5f-6a46ba3b89f3)
+![streamlit-main](https://github.com/user-attachments/assets/b8815554-92e7-40c8-8caa-c38cb7bc899a)
 ![main](https://github.com/user-attachments/assets/4692eab5-923e-4a58-af87-3c60d551fff4)
