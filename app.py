@@ -620,8 +620,6 @@ def main_app():
                 unsafe_allow_html=True
                 )
 
-# -----------------------
-# Логика показа Intro Page или основного приложения
-# -----------------------
+
 if __name__ == "__main__":
     main_app()
