@@ -30,13 +30,13 @@
 * **Фреймворк приложения:** [Streamlit](https://streamlit.io/)
 * **Язык программирования:** Python 3.12
 * **Машинное обучение/NLP:**
-* [Google AI Studio](https://ai.google.dev/gemini-api/docs): Для работы с Google LLM (распознавание текста, адаптация, TEI, тифлокомментирование). В нашем проекте мы использовали модель `gemini-2.0-flash-thinking-exp-01-21`.
-* [Transformers](https://huggingface.co/models): Для TTS (синтез речи) мы использовали [модель VITS](https://huggingface.co/utrobinmv/tts_ru_free_hf_vits_low_multispeaker).
-* [PyTorch](https://pytorch.org/): в качестве бэкенда для Transformers.
-* [RUAccent](https://github.com/Den4ikAI/ruaccent): Для расстановки ударений перед синтезом речи.
-* Pandas: Для работы с локальными файлами csv и xlsx.
+    * [Google AI Studio](https://ai.google.dev/gemini-api/docs): Для работы с Google LLM (распознавание текста, адаптация, TEI, тифлокомментирование). В нашем проекте мы использовали модель `gemini-2.0-flash-thinking-exp-01-21`.
+    * [Transformers](https://huggingface.co/models): Для TTS (синтез речи) мы использовали [модель VITS](https://huggingface.co/utrobinmv/tts_ru_free_hf_vits_low_multispeaker).
+    * [PyTorch](https://pytorch.org/): в качестве бэкенда для Transformers.
+    * [RUAccent](https://github.com/Den4ikAI/ruaccent): Для расстановки ударений перед синтезом речи.
+    * Pandas: Для работы с локальными файлами csv и xlsx.
 * **Обработка изображений:**
-* Pillow (PIL)
+    * Pillow (PIL)
 
 
 ## Советы по использованию
