@@ -24,6 +24,7 @@ This project is an interactive web application based on Streamlit, providing acc
 * **Inclusive interface:** Ability to switch between standard and inclusive (higher contrast, with enlarged elements) display modes.
 * **Data download:** Ability to download page scans (as PDF or ZIP archive with PNG) and all generated texts/markup (TXT, XML).
 
+![main_functions](https://github.com/Ozymandias-17/HTR-inclusive-app/blob/main/streamlit-functions.gif)
 
 ## ⚙️ Tools
 
