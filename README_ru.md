@@ -6,6 +6,7 @@
 
 [litlsun](https://github.com/litlsun) и [eoficool](https://github.com/eoficool) также помогли в создании этого проекта.
 
+![main_paige](https://github.com/Ozymandias-17/HTR-inclusive-app/blob/main/streamlit-main.gif)
 
 ## 🌟 Основные возможности
 
@@ -22,6 +23,7 @@
 * **Инклюзивный интерфейс** 
 * **Загрузка данных:** Возможность загрузки сканов страниц (в виде PDF или ZIP-архива с PNG) и всех сгенерированных текстов/разметки (TXT, XML).
 
+![main_functions](https://github.com/Ozymandias-17/HTR-inclusive-app/blob/main/streamlit-functions.gif)
 
 ## ⚙️ Инструменты
 
