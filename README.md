@@ -7,6 +7,7 @@ This project is an interactive web application based on Streamlit, providing acc
 
 [litlsun](https://github.com/litlsun) and [eoficool](https://github.com/eoficool) also helped make this project.
 
+![main_paige](https://github.com/Ozymandias-17/HTR-inclusive-app/blob/main/streamlit-main.gif)
 
 ## 🌟 Key Features
 
